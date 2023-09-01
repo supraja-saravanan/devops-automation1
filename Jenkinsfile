@@ -1,5 +1,8 @@
-ppipeline {
+pipeline {
     agent any
+    environment {
+        dockerHubCredential = 'Docker_key'
+    }
     tools{
         maven 'maven_3_5_0'
     }
@@ -17,17 +20,16 @@ ppipeline {
                 }
             }
         }
-        stage('Push image to Hub'){
-            steps{
-                script{
-                   withCredentials([string(credentialsId: 'Docker_key', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u supraja13 -p ${dockerhubpwd}'
-
-}
-                   sh 'docker push supraja13/devops-integration'
-                }
+        stage('Pushing Image') {
+    steps {
+        script {
+            docker.withRegistry('https://registry.hub.docker.com', dockerHubCredential) {
+                sh 'docker push supraja13/devops-integration'
             }
         }
+    }
+}
+
         stage('Deploy to k8s'){
             steps{
                 script{
