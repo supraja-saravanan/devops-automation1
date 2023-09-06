@@ -11,7 +11,7 @@ public class DevopsIntegrationApplication {
 
 	@GetMapping
 	public String message(){
-		return "welcome to Quadgen";
+		return "welcome to SUPU WORLD";
 	}
 
 	public static void main(String[] args) {
