@@ -11,7 +11,7 @@ public class DevopsIntegrationApplication {
 
 	@GetMapping
 	public String message(){
-		return "welcome to SUPUS WORLD";
+		return "welcome to KupUS WORLD";
 	}
 
 	public static void main(String[] args) {
