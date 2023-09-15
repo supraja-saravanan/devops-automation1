@@ -2,15 +2,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook         
-  namespace: argocd      
+  name: myargocd
+  namespace: argocd
 
 spec:
-  project: default       
+  project: default
   source:
-    repoURL: https://github.com/supraja-saravanan/devops-automation1.git   
-    targetRevision: HEAD 
-    path: ..........      
+    repoURL: https://github.com/supraja-saravanan/devops-automation1.git
+    targetRevision: HEAD
+    path: devops-automation1
   destination:
-    server: https://kubernetes.default.svc   
-    namespace: argocd                     
+    server: https://kubernetes.default.svc
+    namespace: appargo
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+
